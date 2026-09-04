@@ -1,26 +1,51 @@
+using TurnosSalas.Algorithms;
+using TurnosSalas.Models;
+using TurnosSalas.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddSingleton<HistoryService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+app.UseDefaultFiles();   
+app.UseStaticFiles();    
+
+app.MapPost("/api/schedule", async (ScheduleRequestBody body, HistoryService history) =>
 {
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+    if (body?.Activities is null)
+    {
+        return Results.BadRequest(new { error = "Se esperaba un arreglo 'activities'." });
+    }
 
-app.UseHttpsRedirection();
+    foreach (var a in body.Activities)
+    {
+        if (a.End <= a.Start)
+        {
+            return Results.BadRequest(new
+            {
+                error = $"Actividad inválida: \"{a.Name ?? a.Id}\" tiene horario inconsistente."
+            });
+        }
+    }
 
-app.UseRouting();
+    var result = GreedyScheduler.SelectActivities(body.Activities);
 
-app.UseAuthorization();
+    var entry = new HistoryEntry(
+        Timestamp: DateTime.UtcNow.ToString("o"),
+        TotalSolicitadas: body.Activities.Count,
+        TotalAsignadas: result.Selected.Count,
+        TotalRechazadas: result.Rejected.Count);
 
-app.MapStaticAssets();
-app.MapRazorPages()
-   .WithStaticAssets();
+    await history.AppendAsync(entry);
+
+    return Results.Ok(result);
+});
+
+app.MapGet("/api/history", async (HistoryService history) =>
+{
+    var entries = await history.ReadAsync();
+    return Results.Ok(entries);
+});
 
 app.Run();
