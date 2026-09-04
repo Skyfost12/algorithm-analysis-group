@@ -8,7 +8,8 @@
 
   <ItemGroup>
     <Folder Include="Algorithms\" />
-    <Folder Include="Services\" />
+    <Folder Include="Data\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>
