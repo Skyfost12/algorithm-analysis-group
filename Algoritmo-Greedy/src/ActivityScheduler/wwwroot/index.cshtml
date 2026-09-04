@@ -1,0 +1,82 @@
+﻿<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tablero de salas — Asignación por Greedy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <header class="site-head">
+        <div class="site-head__mark">Salón &amp; Horario</div>
+        <h1>Un salón, muchas solicitudes. <span class="italic">¿Cuáles caben?</span></h1>
+        <p class="site-head__sub">
+            Cada actividad pide un salón y un bloque de tiempo. El algoritmo greedy nos 
+            ordenará las solicitudes por hora de finalización y las acepta una a una,
+            sin nunca deshacer una decisión.
+        </p>
+    </header>
+
+    <main class="layout">
+        <section class="panel" aria-labelledby="form-title">
+            <h2 id="form-title">Nueva actividad</h2>
+            <form id="activity-form">
+                <label>
+                    Nombre
+                    <input type="text" id="name" placeholder="Cálculo II — grupo 4" required />
+                </label>
+                <label>
+                    Salón
+                    <input type="text" id="room" placeholder="Salón 301" required />
+                </label>
+                <div class="time-row">
+                    <label>
+                        Inicio
+                        <input type="time" id="start" required />
+                    </label>
+                    <label>
+                        Fin
+                        <input type="time" id="end" required />
+                    </label>
+                </div>
+                <button type="submit">Agregar a la lista</button>
+            </form>
+
+            <div class="pending">
+                <h3>Solicitudes pendientes <span id="pending-count" class="count">0</span></h3>
+                <ol id="pending-list" class="pending-list"></ol>
+            </div>
+
+            <button id="run-btn" class="run-btn" disabled>Calcular asignación óptima</button>
+            <button id="demo-btn" class="demo-btn" type="button">Cargar ejemplo</button>
+        </section>
+
+        <section class="board" aria-labelledby="board-title">
+            <h2 id="board-title">Tablero de asignaciones</h2>
+            <div id="board-grid" class="board-grid">
+                <p class="empty-state">Agrega actividades y presiona «Calcular asignación óptima» para ver el tablero.</p>
+            </div>
+
+            <div class="results-split">
+                <div class="results-col">
+                    <h3>Asignadas <span id="selected-count" class="count count--ok">0</span></h3>
+                    <ul id="selected-list" class="result-list"></ul>
+                </div>
+                <div class="results-col">
+                    <h3>Rechazadas <span id="rejected-count" class="count count--bad">0</span></h3>
+                    <ul id="rejected-list" class="result-list"></ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="stats-bar" id="stats-bar" hidden>
+        <span id="stats-text"></span>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
