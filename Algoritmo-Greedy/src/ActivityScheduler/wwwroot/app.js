@@ -163,7 +163,7 @@ function renderResults(selected, rejected) {
 
   rejList.innerHTML = rejected
     .map(
-      (a) => `<li>${a.name}<span class="meta">${a.room} · ${a.reason}</span></li>`
+        (a) => `<li>${a.name}<span class="meta">${a.room}· ${minutesToTime(a.start)}–${minutesToTime(a.end)} · ${a.reason}</span></li>`
     )
     .join("") || `<li style="border-left-color: var(--line); background: transparent;">—</li>`;
 }
