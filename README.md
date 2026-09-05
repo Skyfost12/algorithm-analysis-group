@@ -1,4 +1,4 @@
-## Equipo y división de trabajo
+## Equipo
 
 Integrante
 
