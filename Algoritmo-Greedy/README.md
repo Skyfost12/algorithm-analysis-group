@@ -57,15 +57,5 @@ además muestra la lista de actividades rechazadas.
 `HistoryService`), consultable en `GET /api/history`, para llevar
 estadísticas de uso.
 
-
-
-## Equipo y división de trabajo
-
-Integrante
-
-* Alejandro Atehortúa Pineda
-* Efren Felipe Cuadrado Barboza
-* Denisse Scarleth Gallardo Benjumea
-
 ## Link video
 [Video demostrativo](https://drive.google.com/file/d/1XX7zDROQvvKlu0gyeCXy3QNt75U2YbCQ/view)
