@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Grafos.Models;
 using RutaOptimaApi.Models;
 
 namespace RutaOptimaApi.Algoritmos;
