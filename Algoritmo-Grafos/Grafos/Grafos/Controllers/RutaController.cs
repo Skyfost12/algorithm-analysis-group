@@ -1,8 +1,8 @@
 ﻿using Grafos.Service;
 using Microsoft.AspNetCore.Mvc;
-using RutaOptimaApi.Algoritmos;
+using Grafos.Algoritmos;
 
-namespace RutaOptimaApi.Controllers;
+namespace Grafos.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

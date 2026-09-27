@@ -1,8 +1,7 @@
 using System.Diagnostics;
 using Grafos.Models;
-using RutaOptimaApi.Models;
 
-namespace RutaOptimaApi.Algoritmos;
+namespace Grafos.Algoritmos;
 
 /// <summary>
 /// Algoritmo de Dijkstra: encuentra el camino más corto desde un nodo

@@ -1,6 +1,4 @@
-﻿using Grafos.Models;
-
-namespace RutaOptimaApi.Models;
+﻿namespace Grafos.Models;
 
 /// <summary>
 /// Resultado que devuelve la API tras calcular la ruta óptima.

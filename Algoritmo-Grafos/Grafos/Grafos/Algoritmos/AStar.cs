@@ -1,8 +1,7 @@
 ﻿using Grafos.Models;
-using RutaOptimaApi.Models;
 using System.Diagnostics;
 
-namespace RutaOptimaApi.Algoritmos;
+namespace Grafos.Algoritmos;
 
 /// <summary>
 /// Algoritmo A*: igual que Dijkstra, pero prioriza los nodos usando
