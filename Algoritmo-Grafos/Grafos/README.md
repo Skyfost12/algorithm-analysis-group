@@ -56,6 +56,6 @@ direcciones — buen momento para el video de sustentación.
    exploración** de nodos (para poder animar la búsqueda en el mapa).
 
 ## Video de sustentación
+[Video demostrativo](https://drive.google.com/file/d/1wT7ctgXbycpvjwTb3KyZp9WTqtgG52WV/view)
 
-`https://drive.google.com/file/d/1wT7ctgXbycpvjwTb3KyZp9WTqtgG52WV/view?usp=sharing`
 
