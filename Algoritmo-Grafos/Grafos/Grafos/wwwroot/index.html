@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RutaOptima — Despacho de rutas</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="consola">
+
+  <header class="consola__topbar">
+    <div class="marca">
+      <span class="marca__punto"></span>
+      <h1>RutaOptima</h1>
+    </div>
+    <p class="marca__sub">Despacho de rutas sobre grafo de calles — Dijkstra / A*</p>
+  </header>
+
+  <div class="consola__cuerpo">
+
+    <main class="mapa-envoltorio">
+      <div id="mapa"></div>
+
+      <div class="mapa__instruccion" id="instruccion">
+        Haz clic en un nodo del mapa para fijar el <strong>origen</strong>
+      </div>
+    </main>
+
+    <aside class="panel">
+
+      <section class="panel__bloque">
+        <h2>Selección</h2>
+        <div class="fila-dato">
+          <span class="fila-dato__etiqueta">Origen</span>
+          <span class="fila-dato__valor" id="valOrigen">—</span>
+        </div>
+        <div class="fila-dato">
+          <span class="fila-dato__etiqueta">Destino</span>
+          <span class="fila-dato__valor" id="valDestino">—</span>
+        </div>
+        <button class="btn btn--fantasma" id="btnLimpiar">Limpiar selección</button>
+      </section>
+
+      <section class="panel__bloque">
+        <h2>Algoritmo</h2>
+        <div class="segmentado" id="selectorAlgoritmo">
+          <button class="segmentado__opcion es-activa" data-algo="astar">A*</button>
+          <button class="segmentado__opcion" data-algo="dijkstra">Dijkstra</button>
+        </div>
+        <button class="btn btn--primario" id="btnCalcular" disabled>Calcular ruta</button>
+        <button class="btn btn--secundario" id="btnComparar" disabled>Comparar ambos</button>
+      </section>
+
+      <section class="panel__bloque panel__bloque--stats">
+        <h2>Resultado</h2>
+
+        <div class="stats" id="statsUnico">
+          <div class="stat">
+            <span class="stat__numero" id="statDistancia">0</span>
+            <span class="stat__unidad">metros</span>
+          </div>
+          <div class="stat">
+            <span class="stat__numero" id="statNodos">0</span>
+            <span class="stat__unidad">nodos explorados</span>
+          </div>
+          <div class="stat">
+            <span class="stat__numero" id="statTiempo">0</span>
+            <span class="stat__unidad">ms de cálculo</span>
+          </div>
+        </div>
+
+        <div class="stats-comparativa oculto" id="statsComparativa">
+          <div class="stats-comparativa__fila stats-comparativa__fila--encabezado">
+            <span></span>
+            <span class="col-astar">A*</span>
+            <span class="col-dijkstra">Dijkstra</span>
+          </div>
+          <div class="stats-comparativa__fila">
+            <span>Distancia</span>
+            <span class="col-astar" id="cmpDistanciaAstar">—</span>
+            <span class="col-dijkstra" id="cmpDistanciaDijkstra">—</span>
+          </div>
+          <div class="stats-comparativa__fila">
+            <span>Nodos explorados</span>
+            <span class="col-astar" id="cmpNodosAstar">—</span>
+            <span class="col-dijkstra" id="cmpNodosDijkstra">—</span>
+          </div>
+          <div class="stats-comparativa__fila">
+            <span>Tiempo (ms)</span>
+            <span class="col-astar" id="cmpTiempoAstar">—</span>
+            <span class="col-dijkstra" id="cmpTiempoDijkstra">—</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel__bloque panel__bloque--leyenda">
+        <div class="leyenda-item">
+          <span class="leyenda-item__marca leyenda-item__marca--explorado"></span>
+          Nodo explorado
+        </div>
+        <div class="leyenda-item">
+          <span class="leyenda-item__marca leyenda-item__marca--ruta"></span>
+          Ruta final
+        </div>
+      </section>
+
+    </aside>
+
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
