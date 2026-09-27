@@ -57,5 +57,5 @@ direcciones — buen momento para el video de sustentación.
 
 ## Video de sustentación
 
-`[https://drive.google.com/file/d/1wT7ctgXbycpvjwTb3KyZp9WTqtgG52WV/view?usp=sharing]`
+`https://drive.google.com/file/d/1wT7ctgXbycpvjwTb3KyZp9WTqtgG52WV/view?usp=sharing`
 
