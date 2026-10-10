@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RutaOptima — Ruta óptima de repartidor</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+    <div class="consola">
+
+        <header class="consola__topbar">
+            <div class="marca">
+                <span class="marca__punto"></span>
+                <h1>RutaOptima</h1>
+            </div>
+            <p class="marca__sub">Ruta óptima de repartidor sobre el grafo de calles — Held-Karp</p>
+        </header>
+
+        <div class="consola__cuerpo">
+
+            <main class="mapa-envoltorio">
+                <div id="mapa"></div>
+
+                <div class="mapa__instruccion" id="instruccion">
+                    Haz clic en el mapa para fijar el <strong>depósito</strong>
+                </div>
+
+                <div class="mapa__toast oculto" id="toast" role="status"></div>
+
+                <!-- Tabla DP de Held-Karp (hasta 7 entregas) -->
+                <section class="dp-cajon oculto" id="dpCajon">
+                    <div class="dp-cajon__tabla" id="dpTabla"></div>
+                    <div class="dp-cajon__explica" id="dpExplica"></div>
+                </section>
+            </main>
+
+            <aside class="panel">
+
+                <!-- ===== Ruta óptima de repartidor con Held-Karp ===== -->
+                <div class="panel__grupo" id="panelRepartidor">
+
+                    <section class="panel__bloque">
+                        <h2>Paradas</h2>
+                        <div class="fila-dato">
+                            <span class="fila-dato__etiqueta">Depósito</span>
+                            <span class="fila-dato__valor" id="repDeposito">—</span>
+                        </div>
+                        <div class="fila-dato">
+                            <span class="fila-dato__etiqueta">Entregas</span>
+                            <span class="fila-dato__valor" id="repEntregas">0 / 17</span>
+                        </div>
+                        <button class="btn btn--primario" id="repCalcular" disabled>Calcular ruta óptima</button>
+                        <button class="btn btn--fantasma" id="repLimpiar">Limpiar paradas</button>
+                        <p class="nota oculto" id="repError" role="alert"></p>
+                    </section>
+
+                    <section class="panel__bloque oculto" id="repResultado">
+                        <h2>Resultado</h2>
+
+                        <div class="stat">
+                            <span class="stat__numero" id="repDistancia">0</span>
+                            <span class="stat__unidad" id="repDistanciaUnidad">metros (óptimo)</span>
+                        </div>
+
+                        <div class="stats-comparativa rep-tabla">
+                            <div class="stats-comparativa__fila stats-comparativa__fila--encabezado">
+                                <span></span>
+                                <span class="col-astar">Óptima</span>
+                                <span class="col-dijkstra">V. cercano</span>
+                            </div>
+                            <div class="stats-comparativa__fila">
+                                <span>Distancia (m)</span>
+                                <span class="col-astar" id="repOptimaDist">—</span>
+                                <span class="col-dijkstra" id="repVecinoDist">—</span>
+                            </div>
+                        </div>
+                        <p class="nota" id="repExtra"></p>
+
+                        <h2 class="rep-subtitulo">Tamaño del problema</h2>
+                        <div class="fila-dato"><span class="fila-dato__etiqueta" id="repEtiquetaFact">Rutas posibles</span><span class="fila-dato__valor" id="repRutas">—</span></div>
+                        <div class="fila-dato"><span class="fila-dato__etiqueta">Estados de la DP</span><span class="fila-dato__valor" id="repEstados">—</span></div>
+                        <div class="fila-dato"><span class="fila-dato__etiqueta">Transiciones de la DP</span><span class="fila-dato__valor" id="repTransiciones">—</span></div>
+                        <div class="fila-dato"><span class="fila-dato__etiqueta">Llamadas sin memoización</span><span class="fila-dato__valor" id="repRecursion">—</span></div>
+
+                        <h2 class="rep-subtitulo">Tiempo de cálculo</h2>
+                        <div class="fila-dato"><span class="fila-dato__etiqueta">Matriz de distancias</span><span class="fila-dato__valor" id="repTiempoMatriz">—</span></div>
+                        <div class="fila-dato"><span class="fila-dato__etiqueta">Held-Karp</span><span class="fila-dato__valor" id="repTiempoHk">—</span></div>
+
+                        <h2 class="rep-subtitulo">Tramos de la ruta óptima</h2>
+                        <ol class="tramos" id="repTramos"></ol>
+
+                        <button class="btn btn--secundario oculto" id="repToggleDp">Ver tabla DP</button>
+                        <p class="nota oculto" id="repNotaDp">Con más de 7 entregas la tabla DP es demasiado grande para mostrarla.</p>
+                    </section>
+
+                    <section class="panel__bloque panel__bloque--leyenda">
+                        <div class="leyenda-item">
+                            <span class="leyenda-item__marca leyenda-item__marca--ruta"></span>
+                            Ruta óptima (Held-Karp)
+                        </div>
+                        <div class="leyenda-item">
+                            <span class="leyenda-item__marca leyenda-item__marca--vecino"></span>
+                            Vecino más cercano (punteada)
+                        </div>
+                    </section>
+
+                </div>
+
+            </aside>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="app.js"></script>
+    <script src="repartidor.js"></script>
+</body>
+</html>
