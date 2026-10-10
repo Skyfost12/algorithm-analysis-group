@@ -145,4 +145,4 @@ aleatorios con 8 entregas, el **vecino más cercano** fue peor que el óptimo en
 - Un solo repartidor, sin capacidad ni ventanas de tiempo.
 
 ## Link video
-[Video demostrativo]()
+[Video demostrativo](https://drive.google.com/file/d/1Ax4iBO6_fA1C7E1lEW-Vm3cxkDRoZ2U2/view)
