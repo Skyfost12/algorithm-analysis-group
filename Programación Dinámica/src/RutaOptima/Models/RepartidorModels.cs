@@ -1,4 +1,4 @@
-namespace RutaOptimaApi.Models;
+namespace RutaOptima.Models;
 
 // Contratos JSON del endpoint POST /api/repartidor/ruta (ruta óptima de repartidor con Held-Karp).
 
