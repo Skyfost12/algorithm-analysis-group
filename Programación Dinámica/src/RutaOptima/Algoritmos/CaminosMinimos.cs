@@ -1,6 +1,6 @@
-using RutaOptimaApi.Models;
+using RutaOptima.Models;
 
-namespace RutaOptimaApi.Algoritmos;
+namespace RutaOptima.Algoritmos;
 
 /// <summary>
 /// Árbol de caminos mínimos desde un nodo origen hacia TODOS los demás nodos alcanzables.

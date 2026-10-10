@@ -1,4 +1,4 @@
-namespace RutaOptimaApi.Algoritmos;
+namespace RutaOptima.Algoritmos;
 
 /// <summary>
 /// Resultado de Held-Karp. Se conserva TODA la tabla para poder mostrarla y explicar cada celda.

@@ -1,4 +1,4 @@
-namespace RutaOptimaApi.Algoritmos;
+namespace RutaOptima.Algoritmos;
 
 /// <summary>Resultado de un algoritmo que devuelve un recorrido [0, ..., 0] y su largo.</summary>
 public sealed record TourResult(int[] Tour, double TotalCost);
