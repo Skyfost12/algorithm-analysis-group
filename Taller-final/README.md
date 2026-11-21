@@ -63,3 +63,45 @@ Complejidad:
   Espacio: O(L)
 
 ![Accepted — Word searchd](evidencias/Word_Search.png)
+
+
+
+[Edit Distance](https://leetcode.com/problems/edit-distance/description/)
+
+Autor: Efrén Cuadrado (efrencuadrado289348)
+Familia: Dynamic Programming
+Idea: Creamos una matriz dp donde dp[i][j] representa el número mínimo de operaciones para convertir los primeros i caracteres de word1 en los primeros j caracteres de word2. Los casos base son convertir desde o hacia una cadena vacía (i o j operaciones). Si los caracteres actuales coinciden, heredamos dp[i-1][j-1]; si no, tomamos 1 más el mínimo entre eliminar, insertar o reemplazar.
+Complejidad:
+  n= longitud de word1
+  m= longitud de word2
+  Tiempo: O(n · m)
+  Espacio: O(n · m)
+
+![Accepted — Edit Distance](evidencias/edit-distance-accepted.png)
+
+
+[Network Delay Time](https://leetcode.com/problems/network-delay-time/description/)
+
+Autor: Efrén Cuadrado (efrencuadrado289348)
+Familia: Grafos (Dijkstra)
+Idea: Utilizamos Dijkstra para encontrar el camino de menor tiempo acumulado desde el nodo inicial k hasta todos los demás nodos. En cada iteración seleccionamos mediante un Min-Heap el nodo que tenga la menor distancia tentativa y actualizamos las distancias de sus vecinos si encontramos un camino más corto.
+Complejidad:
+  n= cantidad de vértices o nodos.
+  m= cantidad de aristas o conexiones (times.length).
+  Tiempo: O((n + m) log n)
+  Espacio: O(n + m)
+
+![Accepted — Network Delay Time](evidencias/network-delay-time-accepted.png)
+
+
+[Min Cost to Connect All Points](https://leetcode.com/problems/min-cost-to-connect-all-points/description/)
+
+Autor: Efrén Cuadrado (efrencuadrado289348)
+Familia: Grafos (Árbol de expansión mínima - Prim)
+Idea: Comenzamos desde un punto cualquiera y, con el algoritmo de Prim, en cada paso agregamos al árbol el punto no visitado más cercano según la distancia Manhattan. Mantenemos para cada punto la distancia mínima hacia el árbol actual y la actualizamos cada vez que se agrega un nuevo punto, hasta conectar todos.
+Complejidad:
+  n= cantidad de puntos
+  Tiempo: O(n²)
+  Espacio: O(n)
+
+![Accepted — Min Cost to Connect All Points](evidencias/min-cost-connect-points-accepted.png)
